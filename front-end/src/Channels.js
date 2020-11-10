@@ -16,7 +16,7 @@ const styles = {
 export default () => {
   const [channels, setChannels] = useState([])
   useEffect( () => {
-    fetch = async () => {
+    const fetch = async () => {
       const {data: channels} = await axios.get('http://localhost:3001/channels')
       setChannels(channels)
     }
