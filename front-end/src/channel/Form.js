@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios';
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 // Layout
@@ -29,16 +30,19 @@ const useStyles = (theme) => {
 }
 
 export default ({
-  addMessage
+  addMessage,
+  channel,
 }) => {
   const [content, setContent] = useState('')
   const styles = useStyles(useTheme())
-  const onSubmit = (e) => {
-    addMessage({
+  const onSubmit = async () => {
+    const {data: message} = await axios.post(
+      `http://localhost:3001/channels/${channel.id}/messages`
+    , {
       content: content,
       author: 'david',
-      creation: Date.now(),
     })
+    addMessage(message)
     setContent('')
   }
   const handleChange = (e) => {

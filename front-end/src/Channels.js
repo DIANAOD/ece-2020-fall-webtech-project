@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
+// Layout
+import Link from '@material-ui/core/Link'
 
 const styles = {
   root: {
@@ -13,7 +15,9 @@ const styles = {
   }
 }
 
-export default () => {
+export default ({
+  onChannel
+}) => {
   const [channels, setChannels] = useState([])
   useEffect( () => {
     const fetch = async () => {
@@ -26,7 +30,15 @@ export default () => {
     <ul style={styles.root}>
       { channels.map( (channel, i) => (
         <li key={i} css={styles.channel}>
-          {channel.name}
+          <Link
+            href="#"
+            onClick={ (e) => {
+              e.preventDefault()
+              onChannel(channel)
+            }}
+            >
+            {channel.name}
+          </Link>
         </li>
       ))}
     </ul>

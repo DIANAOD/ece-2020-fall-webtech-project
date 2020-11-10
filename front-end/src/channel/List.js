@@ -56,34 +56,32 @@ export default forwardRef(({
   messages,
   onScrollDown,
 }, ref) => {
-  useImperativeHandle(ref, () => ({
-    scroll: () => {
-      scroll()
-    }
-  }));
   const styles = useStyles(useTheme())
+  // Expose the `scroll` action
+  useImperativeHandle(ref, () => ({
+    scroll: scroll
+  }));
   const rootEl = useRef(null)
   const scrollEl = useRef(null)
   const scroll = () => {
     scrollEl.current.scrollIntoView()
   }
-  useLayoutEffect( () => {
-    scroll()
-  }, [])
   // See https://dev.to/n8tb1t/tracking-scroll-position-with-react-hooks-3bbj
-  let throttleTimeout = null
+  const throttleTimeout = useRef(null) // react-hooks/exhaustive-deps
   useLayoutEffect( () => {
+    const rootNode = rootEl.current // react-hooks/exhaustive-deps
     const handleScroll = () => {
-      if (throttleTimeout === null) {
-        throttleTimeout = setTimeout(() => {
-          throttleTimeout = null
-          const {scrollTop, offsetHeight, scrollHeight} = rootEl.current
-          onScrollDown(scrollTop + offsetHeight !== scrollHeight)
+      if (throttleTimeout.current === null) {
+        throttleTimeout.current = setTimeout(() => {
+          throttleTimeout.current = null
+          const {scrollTop, offsetHeight, scrollHeight} = rootNode // react-hooks/exhaustive-deps
+          onScrollDown(scrollTop + offsetHeight < scrollHeight)
         }, 200)
       }
     }
-    rootEl.current.addEventListener('scroll', handleScroll)
-    return () => rootEl.current.removeEventListener('scroll', handleScroll)
+    handleScroll()
+    rootNode.addEventListener('scroll', handleScroll)
+    return () => rootNode.removeEventListener('scroll', handleScroll)
   })
   return (
     <div css={styles.root} ref={rootEl}>
