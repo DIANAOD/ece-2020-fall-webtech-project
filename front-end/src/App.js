@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import './App.css';
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
@@ -5,6 +6,7 @@ import { jsx } from '@emotion/core'
 import Footer from './Footer'
 import Header from './Header'
 import Main from './Main'
+import Login from './Login'
 
 const styles = {
   root: {
@@ -17,10 +19,13 @@ const styles = {
 }
 
 export default () => {
+  const [user, setUser] = useState(null)
   return (
     <div className="App" css={styles.root}>
       <Header />
-      <Main />
+      {
+        user ? <Main /> : <Login onUser={setUser} />
+      }
       <Footer />
     </div>
   );
