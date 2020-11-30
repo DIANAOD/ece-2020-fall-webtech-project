@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useContext, useState } from 'react'
 import './App.css';
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
@@ -7,6 +7,7 @@ import Footer from './Footer'
 import Header from './Header'
 import Main from './Main'
 import Login from './Login'
+import {Context} from './Context'
 
 const styles = {
   root: {
@@ -19,7 +20,8 @@ const styles = {
 }
 
 export default () => {
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
+  const {oauth} = useContext(Context)
   const [drawerMobileVisible, setDrawerMobileVisible] = useState(false)
   const drawerToggleListener = () => {
     setDrawerMobileVisible(!drawerMobileVisible)
@@ -28,7 +30,7 @@ export default () => {
     <div className="App" css={styles.root}>
       <Header drawerToggleListener={drawerToggleListener}/>
       {
-        user ? <Main drawerMobileVisible={drawerMobileVisible} /> : <Login onUser={setUser} />
+        oauth ? <Main drawerMobileVisible={drawerMobileVisible} /> : <Login />
       }
       <Footer />
     </div>
