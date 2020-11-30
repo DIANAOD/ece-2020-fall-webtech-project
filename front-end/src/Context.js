@@ -9,6 +9,7 @@ export default ({
 }) => {
   const [cookies, setCookie, removeCookie] = useCookies([])
   const [oauth, setOauth] = useState(cookies.oauth)
+  const [drawerVisible, setDrawerVisible] = useState(false)
   // const [channels, setChannels] = useState([])
   // const [currentChannel, setCurrentChannel] = useState(null)
   return (
