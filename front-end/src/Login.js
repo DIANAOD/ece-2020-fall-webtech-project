@@ -33,8 +33,8 @@ const useStyles = (theme) => ({
     flex: '1 1 auto',
     background: theme.palette.background.default,
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
     '& > div': {
       margin: `${theme.spacing(1)}`,
       marginLeft: 'auto',

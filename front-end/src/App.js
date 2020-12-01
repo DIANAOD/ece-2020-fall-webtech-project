@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-import './App.css';
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 // Local

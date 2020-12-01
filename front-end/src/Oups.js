@@ -1,4 +1,4 @@
-import React from 'react'
+
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 // Layout
@@ -10,7 +10,6 @@ const useStyles = (theme) => ({
     overflow: 'hidden',
     flex: '1 1 auto',
     display: 'flex',
-    position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -18,7 +17,6 @@ const useStyles = (theme) => ({
 
 export default () => {
   const styles = useStyles(useTheme())
-  console.log(styles.root)
   return (
     <main css={styles.root}>
       <div>
