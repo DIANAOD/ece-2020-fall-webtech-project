@@ -1,10 +1,12 @@
 
 import React, {useState} from 'react'
-import { useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie'
 
-export const Context = React.createContext();
+const Context = React.createContext()
 
-export default ({
+export default Context
+
+export const Provider = ({
   children
 }) => {
   const [cookies, setCookie, removeCookie] = useCookies([])

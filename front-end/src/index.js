@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { CookiesProvider } from 'react-cookie';
 import './index.css';
 import App from './App';
-import ContextProvider from './Context';
+import { Provider as ContextProvider } from './Context';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto'
 // Layout
