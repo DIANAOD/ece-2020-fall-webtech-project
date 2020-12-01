@@ -8,6 +8,9 @@ import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto'
 // Layout
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 
 const theme = createMuiTheme({
   palette: {
@@ -20,7 +23,9 @@ ReactDOM.render(
     <ContextProvider>
       <CookiesProvider>
         <ThemeProvider theme={theme}>
-          <App />
+          <Router>
+            <App />
+          </Router>
         </ThemeProvider>
       </CookiesProvider>
     </ContextProvider>

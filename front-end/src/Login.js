@@ -10,6 +10,9 @@ import { useTheme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link'
 // Local
 import { Context } from './Context'
+import {
+  useHistory
+} from "react-router-dom";
 
 const base64URLEncode = (str) => {
   return str.toString('base64')
@@ -96,6 +99,8 @@ export default ({
   onUser
 }) => {
   const styles = useStyles(useTheme())
+  const history = useHistory();
+  // const location = useLocation();
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const {oauth, setOauth} = useContext(Context)
   const config = {
@@ -136,7 +141,8 @@ export default ({
           }))
           removeCookie('code_verifier')
           setOauth(data)
-          window.location = '/'
+          // window.location = '/'
+          history.push('/')
         }catch (err) {
           console.error(err)
         }

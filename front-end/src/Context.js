@@ -10,8 +10,8 @@ export default ({
   const [cookies, setCookie, removeCookie] = useCookies([])
   const [oauth, setOauth] = useState(cookies.oauth)
   const [drawerVisible, setDrawerVisible] = useState(false)
-  // const [channels, setChannels] = useState([])
-  // const [currentChannel, setCurrentChannel] = useState(null)
+  const [channels, setChannels] = useState([])
+  const [currentChannel, setCurrentChannel] = useState(null)
   return (
     <Context.Provider value={{
       oauth: oauth,
@@ -25,16 +25,21 @@ export default ({
           oauth.email = payload.email
           setCookie('oauth', oauth)
         }else{
-          // setCurrentChannel(null)
-          // setChannels([])
+          setCurrentChannel(null)
+          setChannels([])
           removeCookie('oauth')
         }
         setOauth(oauth)
       },
-      // channels: channels,
-      // setChannels: setChannels,
-      // currentChannel: currentChannel,
-      // setCurrentChannel: setCurrentChannel,
+      channels: channels,
+      drawerVisible: drawerVisible,
+      setDrawerVisible: setDrawerVisible,
+      setChannels: setChannels,
+      currentChannel: currentChannel,
+      setCurrentChannel: (channelId) => {
+        const channel = channels.find( channel => channel.id === channelId)
+        setCurrentChannel(channel)
+      },
     }}>{children}</Context.Provider>
   )
 }

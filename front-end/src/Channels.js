@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect} from 'react';
 import axios from 'axios';
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
@@ -6,6 +6,7 @@ import { jsx } from '@emotion/core'
 import Link from '@material-ui/core/Link'
 // Local
 import {Context} from './Context'
+import {useHistory} from 'react-router-dom'
 
 const styles = {
   // root: {
@@ -17,11 +18,12 @@ const styles = {
   }
 }
 
-export default ({
-  onChannel
-}) => {
-  const {oauth} = useContext(Context)
-  const [channels, setChannels] = useState([])
+export default () => {
+  const {
+    oauth,
+    channels, setChannels
+  } = useContext(Context)
+  const history = useHistory();
   useEffect( () => {
     const fetch = async () => {
       try{
@@ -36,18 +38,18 @@ export default ({
       }
     }
     fetch()
-  }, [oauth])
+  }, [oauth, setChannels])
   return (
     <ul style={styles.root}>
       { channels.map( (channel, i) => (
         <li key={i} css={styles.channel}>
           <Link
-            href="#"
+            href={`/channels/${channel.id}`}
             onClick={ (e) => {
               e.preventDefault()
-              onChannel(channel)
+              history.push(`/channels/${channel.id}`)
             }}
-            >
+          >
             {channel.name}
           </Link>
         </li>

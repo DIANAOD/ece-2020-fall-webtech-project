@@ -32,10 +32,12 @@ export default ({
   drawerToggleListener
 }) => {
   const styles = useStyles(useTheme())
-  const {oauth, setOauth} = useContext(Context)
-  console.log(oauth)
-  const handleDrawerToggle = (e) => {
-    drawerToggleListener()
+  const {
+    oauth, setOauth,
+    drawerVisible, setDrawerVisible
+  } = useContext(Context)
+  const drawerToggle = (e) => {
+    setDrawerVisible(!drawerVisible)
   }
   const onClickLogout = (e) => {
     e.stopPropagation()
@@ -46,7 +48,7 @@ export default ({
       <IconButton
         color="inherit"
         aria-label="open drawer"
-        onClick={handleDrawerToggle}
+        onClick={drawerToggle}
         css={styles.menu}
       >
         <MenuIcon />
