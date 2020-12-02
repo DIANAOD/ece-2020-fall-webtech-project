@@ -42,7 +42,6 @@ export default () => {
   const styles = useStyles(theme)
   const alwaysOpen = useMediaQuery(theme.breakpoints.up('sm'))
   const isDrawerVisible = alwaysOpen || drawerVisible
-  console.log('currentChannel', currentChannel)
   return (
     <main css={styles.root}>
       <Drawer
