@@ -20,7 +20,6 @@
   ```
 * Register your GitHub application, get the clientID and clientSecret from GitHub and report them to your Dex configuration. Modify the provided `./dex-config/config.yml` configuration to look like:
   ```yaml
-  # 
   - type: github
     id: github
     name: GitHub
