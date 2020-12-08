@@ -24,7 +24,11 @@
   make examples
   ```
   Note, the provided `.gitignore` file ignore the `dex` folder.
-* Register your GitHub application, get the clientID and clientSecret from GitHub and report them to your Dex configuration. Modify the provided `./dex-config/config.yml` configuration to look like:
+* Make a copy of the Dex configuration to `./dex-config/config-private.yaml`, the project is configured to Git ignore this path:
+  ```bash
+  cp -rp ./dex-config/config.yaml ./dex-config/config-private.yaml
+  ```
+* Register your GitHub application, get the clientID and clientSecret from GitHub and report them to your Dex configuration. Modify the provided `./dex-config/config-private.yaml` configuration to look like:
   ```yaml
   - type: github
     id: github
@@ -34,10 +38,10 @@
       clientSecret: xxxxxxxxx80e139441b637796b128d8xxxxxxxxx
       redirectURI: http://127.0.0.1:5556/dex/callback
   ```
-* Inside `./dex-config/config.yml`, the frond-end application is already registered and CORS is activated. Now that Dex is built and configured, your can start the Dex server:
+* Inside `./dex-config/config-private.yaml`, the frond-end application is already registered and CORS is activated. Now that Dex is built and configured, your can start the Dex server:
   ```yaml
   cd dex
-  bin/dex serve ../dex-config/config.yaml
+  bin/dex serve ../dex-config/config-private.yaml
   ```
 * Start the back-end
   ```bash
